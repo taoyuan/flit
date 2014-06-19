@@ -1,0 +1,42 @@
+{
+  "name": "flit",
+  "version": "0.0.1",
+  "description": "Node.js library for streamlining application deployment or systems administration tasks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/taoyuan/flit.git"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "bin": {
+    "hacker": "./bin/flit.js"
+  },
+  "keywords": [
+    "deploy",
+    "task"
+  ],
+  "author": "Tao Yuan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/taoyuan/flit/issues"
+  },
+  "homepage": "https://github.com/taoyuan/flit",
+  "dependencies": {
+    "fibers": "^1.0.1",
+    "interpret": "^0.3.3",
+    "liftoff": "^0.11.3",
+    "minimist": "^0.1.0",
+    "orchestrator": "^0.3.3",
+    "pretty-hrtime": "^0.2.1"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.20.1",
+    "q": "^1.0.1"
+  }
+}
