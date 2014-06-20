@@ -18,7 +18,6 @@ describe('flit/tasks', function () {
 
             // Assert
             t.ok(flit.tasks.test);
-            t.equal(flit.tasks.test.fn, fn);
             flit.reset();
             done();
         });
@@ -30,7 +29,7 @@ describe('flit/tasks', function () {
             fn = function() {};
 
             // Act
-            flit.local('test', fn);
+            flit.taskLocal('test', fn);
 
             // Assert
             t.ok(flit.tasks.test);
@@ -39,48 +38,20 @@ describe('flit/tasks', function () {
             done();
         });
 
-//        it('should throw exception when define a remote task without briefing', function(done) {
-//            var fn;
-//
-//            // Arrange
-//            fn = function() {};
-//
-//            // Act
-//            t.throws(function () { flit.remote('test', fn) }, "You can't do remote flights without a briefing.");
-//
-//            done();
-//        });
-
-        it('should define a remote task with briefing', function(done) {
-            var fn;
-
-            // Arrange
-            fn = function() {};
-
-            // Act
-            flit.briefing({});
-            flit.remote('test', fn);
-
-            // Assert
-            t.ok(flit.tasks.test);
-            t.isFunction(flit.tasks.test.fn);
-            flit.reset();
-            done();
-        });
     });
 
     describe('start()', function () {
 
 
-        it('should start multiple tasks', function(done) {
+        it('should start multiple tasks', function (done) {
             var a, fn, fn2;
 
             // Arrange
             a = 0;
-            fn = function() {
+            fn = function () {
                 ++a;
             };
-            fn2 = function() {
+            fn2 = function () {
                 ++a;
             };
             flit.task('test', fn);
@@ -95,15 +66,15 @@ describe('flit/tasks', function () {
             done();
         });
 
-        it('should start all tasks when call start() multiple times', function(done) {
+        it('should start all tasks when call start() multiple times', function (done) {
 
             var a, fn, fn2;
             a = 0;
-            fn = function() {
+            fn = function () {
                 t.equal(this, flit);
                 ++a;
             };
-            fn2 = function() {
+            fn2 = function () {
                 t.equal(this, flit);
                 ++a;
             };
@@ -116,29 +87,29 @@ describe('flit/tasks', function () {
             done();
         });
 
-        it('should start all async promise tasks', function(done) {
+        it('should start all async promise tasks', function (done) {
             var a, fn, fn2;
             a = 0;
-            fn = function() {
+            fn = function () {
                 var deferred = Q.defer();
-                setTimeout(function() {
+                setTimeout(function () {
                     ++a;
                     deferred.resolve();
-                },1);
+                }, 1);
                 return deferred.promise;
             };
-            fn2 = function() {
+            fn2 = function () {
                 var deferred = Q.defer();
-                setTimeout(function() {
+                setTimeout(function () {
                     ++a;
                     deferred.resolve();
-                },1);
+                }, 1);
                 return deferred.promise;
             };
             flit.task('test', fn);
             flit.task('test2', fn2);
             flit.start('test');
-            flit.start('test2', function() {
+            flit.start('test2', function () {
                 t.equal(flit.isRunning, false);
                 t.equal(a, 2);
                 flit.reset();
@@ -146,25 +117,26 @@ describe('flit/tasks', function () {
             });
             t.equal(flit.isRunning, true);
         });
-        it('should start all async callback tasks', function(done) {
+
+        it('should start all async callback tasks', function (done) {
             var a, fn, fn2;
             a = 0;
-            fn = function(cb) {
-                setTimeout(function() {
+            fn = function (c, cb) {
+                setTimeout(function () {
                     ++a;
                     cb(null);
-                },1);
+                }, 1);
             };
-            fn2 = function(cb) {
-                setTimeout(function() {
+            fn2 = function (c, cb) {
+                setTimeout(function () {
                     ++a;
                     cb(null);
-                },1);
+                }, 1);
             };
             flit.task('test', fn);
             flit.task('test2', fn2);
             flit.start('test');
-            flit.start('test2', function() {
+            flit.start('test2', function () {
                 t.equal(flit.isRunning, false);
                 t.equal(a, 2);
                 flit.reset();
@@ -172,8 +144,9 @@ describe('flit/tasks', function () {
             });
             t.equal(flit.isRunning, true);
         });
-        it('should emit task_not_found and throw an error when task is not defined', function(done) {
-            flit.on('task_not_found', function(err) {
+
+        it('should emit task_not_found and throw an error when task is not defined', function (done) {
+            flit.on('task_not_found', function (err) {
                 t.ok(err);
                 t.ok(err.task);
                 t.equal(err.task, 'test');
@@ -187,10 +160,10 @@ describe('flit/tasks', function () {
             }
         });
 
-        it('should start task scoped to flit', function(done) {
+        it('should start task scoped to flit', function (done) {
             var a, fn;
             a = 0;
-            fn = function() {
+            fn = function () {
                 t.equal(this, flit);
                 ++a;
             };
@@ -202,10 +175,10 @@ describe('flit/tasks', function () {
             done();
         });
 
-        it('should start default task scoped to flit', function(done) {
+        it('should start default task scoped to flit', function (done) {
             var a, fn;
             a = 0;
-            fn = function() {
+            fn = function () {
                 t.equal(this, flit);
                 ++a;
             };
@@ -217,55 +190,7 @@ describe('flit/tasks', function () {
             done();
         });
 
-
-        it('should start local flight task', function(done) {
-            var a, fn;
-
-            a = 0;
-            fn = function() {
-                ++a;
-            };
-            // prepare briefing for local or remote flight task
-            flit.briefing({});
-            flit.local('test', function (c) {
-                t.ok(c);
-                c.echo('hello');
-                fn();
-            });
-
-            // Act
-            flit.start('test', function (err) {
-                t.notOk(err);
-                t.equal(a, 1);
-                flit.reset();
-                done();
-            });
-
-        });
-
-        it('should interrupt when flight task abort', function(done) {
-            var emsg = 'test error';
-
-            // prepare briefing for local or remote flight task
-            flit.briefing({});
-
-            flit.local('test', function (c) {
-                c.abort(emsg);
-            });
-
-            flit.local('test2', function () {
-                t.fail();
-            });
-
-            // Act
-            flit.start(['test', 'test2'], function (err) {
-                t.instanceOf(err, Error);
-                t.equal(err.message, emsg);
-                flit.reset();
-                done();
-            });
-
-        });
     });
+
 
 });
