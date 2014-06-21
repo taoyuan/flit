@@ -13,9 +13,6 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "bin": {
-    "flit": "./bin/flit.js"
-  },
   "keywords": [
     "deploy",
     "task"
@@ -38,7 +35,8 @@
     "orchestrator": "^0.3.3",
     "pretty-hrtime": "^0.2.1",
     "semver": "^2.3.1",
-    "tildify": "^0.2.0"
+    "tildify": "^0.2.0",
+    "yargs": "^1.2.5"
   },
   "devDependencies": {
     "chai": "^1.9.1",
