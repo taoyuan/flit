@@ -24,20 +24,13 @@
   },
   "homepage": "https://github.com/taoyuan/flit",
   "dependencies": {
-    "archy": "0.0.2",
     "chalk": "^0.4.0",
-    "commander": "^2.2.0",
     "dateformat": "^1.0.8-1.2.3",
     "fibers": "^1.0.1",
-    "grunt-legacy-log": "^0.1.1",
-    "interpret": "^0.3.3",
-    "liftoff": "^0.11.3",
     "lodash": "^2.4.1",
     "orchestrator": "^0.3.3",
     "pretty-hrtime": "^0.2.1",
-    "semver": "^2.3.1",
-    "tildify": "^0.2.0",
-    "yargs": "^1.2.5"
+    "tildify": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^1.9.1",
