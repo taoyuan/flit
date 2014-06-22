@@ -1,4 +1,3 @@
-flit
+Flit
 ====
-
-Node.js library for streamlining application deployment or systems administration tasks.
+> A Flexable Javascript Task Runner.
