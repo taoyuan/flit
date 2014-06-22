@@ -20,7 +20,7 @@ npm install --save-dev flit
 
 ```javascript
 module.exports = function (flit) {
-	gulp.task('default', function() {
+	flit.task('default', function() {
 	  	// place code for your default task here
 	});
 };
@@ -34,7 +34,7 @@ flit
 
 The default task will run and do nothing.
 
-To run individual tasks, use `flit <task> <othertask>`.
+To run individual tasks, use `flit <task> <othertask> <@destination>`.
 
 ## Plugins
 #### [flit-contrib-flightplan](https://github.com/taoyuan/flit-contrib-flightplan)
