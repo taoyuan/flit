@@ -1,6 +1,6 @@
 {
   "name": "flit",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Node.js library for streamlining application deployment or systems administration tasks.",
   "main": "index.js",
   "scripts": {

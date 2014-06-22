@@ -1,4 +1,4 @@
 flit
 ====
 
-Node.js library for streamlining application deployment or systems administration tasks based on flightplan
+Node.js library for streamlining application deployment or systems administration tasks.
