@@ -1,5 +1,8 @@
 Flit
 ====
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/taoyuan/flit.svg)](https://greenkeeper.io/)
+
 > A Flexable Javascript Task Runner.
 
 ## Getting Started
